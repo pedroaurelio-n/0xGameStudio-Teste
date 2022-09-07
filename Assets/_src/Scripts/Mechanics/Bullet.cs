@@ -25,6 +25,9 @@ namespace PedroAurelio
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.TryGetComponent<Health>(out Health target))
+                target.HealthValue -= damage;
+                
             Destroy(gameObject);            
         }
     }

@@ -46,7 +46,7 @@ namespace PedroAurelio
             _rigidbody.velocity = clampedVelocity;
         }
 
-        public void SetCurrentDirection(Vector2 direction) => _currentDirection = direction;
+        public void SetCurrentDirection(Vector2 direction) => _currentDirection = direction.normalized;
 
         public void SetCurrentDirection(InputAction.CallbackContext ctx) => SetCurrentDirection(ctx.ReadValue<Vector2>());
     }

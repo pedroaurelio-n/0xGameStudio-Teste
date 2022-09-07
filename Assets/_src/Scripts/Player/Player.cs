@@ -5,6 +5,7 @@ using UnityEngine;
 namespace PedroAurelio
 {
     [RequireComponent(typeof(PlayerInput))]
+    [RequireComponent(typeof(Health))]
     public class Player : MonoBehaviour
     {
         private Animator _animator;
