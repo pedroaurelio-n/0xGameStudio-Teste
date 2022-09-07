@@ -8,6 +8,8 @@ namespace PedroAurelio
     [RequireComponent(typeof(Rigidbody2D))]
     public class Movement : MonoBehaviour
     {
+        public bool IsMoving { get; private set; }
+
         [Header("Settings")]
         [SerializeField, Range(0f, 10f)] private float moveSpeed = 3f;
         [SerializeField, Range(0f, 15f)] private float maxSpeed = 10f;
@@ -25,9 +27,9 @@ namespace PedroAurelio
             Vector2 targetSpeed;
             float acceleration;
 
-            var isMoving = _currentDirection != Vector2.zero;
+            IsMoving = _currentDirection != Vector2.zero;
 
-            if (isMoving)
+            if (IsMoving)
             {
                 targetSpeed = _currentDirection * moveSpeed;
                 acceleration = posAccel;
