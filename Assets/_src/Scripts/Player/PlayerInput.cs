@@ -11,6 +11,7 @@ namespace PedroAurelio
     {
         private Movement _movement;
         private Aim _aim;
+        private ShootBullets _shoot;
         private PlayerControls _controls;
 
         private Camera _mainCamera;
@@ -19,6 +20,7 @@ namespace PedroAurelio
         {
             _movement = GetComponent<Movement>();
             _aim = GetComponent<Aim>();
+            _shoot = GetComponentInChildren<ShootBullets>();
 
             _mainCamera = Camera.main;
         }
@@ -40,6 +42,9 @@ namespace PedroAurelio
 
                 _controls.Gameplay.Aim.performed += ConvertMouseToWorldPoint;
 
+                _controls.Gameplay.Shoot.performed += _shoot.SetShootBool;
+                _controls.Gameplay.Shoot.canceled += _shoot.SetShootBool;
+
                 _controls.Enable();
             }
         }
@@ -49,6 +54,9 @@ namespace PedroAurelio
             _controls.Gameplay.Move.performed -= _movement.SetCurrentDirection;
 
             _controls.Gameplay.Aim.performed -= ConvertMouseToWorldPoint;
+
+            _controls.Gameplay.Shoot.performed -= _shoot.SetShootBool;
+            _controls.Gameplay.Shoot.canceled -= _shoot.SetShootBool;
 
             _controls.Disable();
         }
