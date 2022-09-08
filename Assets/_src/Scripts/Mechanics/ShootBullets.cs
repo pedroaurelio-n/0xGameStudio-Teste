@@ -14,13 +14,14 @@ namespace PedroAurelio
 
         [Header("Patterns")]
         [SerializeField] private bool isAiming;
+        [SerializeField] private float initialRotation;
         [SerializeField] private int sideCount;
-        [SerializeField] private int bulletsPerSide;
         [SerializeField, Range(0f, 360f)] private float angleOpening;
         [SerializeField, Range(0f, 1f)] private float missRate;
         [SerializeField, Range(0f, 360f)] private float missAngleOpening;
 
         [Header("Settings")]
+        [SerializeField] private bool needInput;
         [SerializeField] private float startDelay;
         [SerializeField] private float bulletSpeed;
         [SerializeField] private float fireRate;
@@ -36,6 +37,9 @@ namespace PedroAurelio
                 spawnPosition = transform;
 
             _fireTime = startDelay;
+
+            if (!isAiming)
+                _rotation.z = initialRotation;
         }
 
         private void FixedUpdate()
@@ -46,7 +50,13 @@ namespace PedroAurelio
                 return;
             }
 
-            if (_shoot) Shoot();
+            if (needInput)
+            {
+                if (_shoot) Shoot();
+                return;
+            }
+            
+            Shoot();
         }
 
         private void Shoot()
@@ -55,7 +65,7 @@ namespace PedroAurelio
 
             var missRange = new Vector3(0f, 0f, missAngleOpening * Random.Range(-missRate, missRate));
             var currentRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
-            var direction = currentRotation + _rotation + missRange;
+            var direction = isAiming ? _rotation + missRange + currentRotation : _rotation + missRange;
 
             if (sideCount == 1)
             {

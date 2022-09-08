@@ -15,7 +15,7 @@ namespace PedroAurelio
         {
             TryGetComponent<Movement>(out _Movement);
             TryGetComponent<Aim>(out _Aim);
-            TryGetComponent<ShootBullets>(out _Shoot);
+            _Shoot = GetComponentInChildren<ShootBullets>();
         }
     }
 }

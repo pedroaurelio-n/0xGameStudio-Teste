@@ -8,11 +8,6 @@ namespace PedroAurelio
     {
         [SerializeField] private Transform target;
 
-        private void Start()
-        {
-            _Shoot?.SetShootBool(true);
-        }
-
         private void Update()
         {
             _Aim.SetAimDirection(target);
