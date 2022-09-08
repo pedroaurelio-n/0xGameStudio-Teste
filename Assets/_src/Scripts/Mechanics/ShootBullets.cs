@@ -1,46 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.InputSystem;
  
 namespace PedroAurelio
 {
     public class ShootBullets : MonoBehaviour
     {
-        [Header("Dependencies")]
-        [SerializeField] private Bullet bulletPrefab;
+        [SerializeField] private ShootingPattern pattern;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private Transform dynamic;
 
-        [Header("Patterns")]
-        [SerializeField] private bool isAiming;
-        [SerializeField] private float initialRotation;
-        [SerializeField] private int sideCount;
-        [SerializeField, Range(0f, 360f)] private float angleOpening;
-        [SerializeField, Range(0f, 1f)] private float missRate;
-        [SerializeField, Range(0f, 360f)] private float missAngleOpening;
+        private ObjectPool<Bullet> _bulletPool;
 
-        [Header("Settings")]
-        [SerializeField] private bool needInput;
-        [SerializeField] private float startDelay;
-        [SerializeField] private float bulletSpeed;
-        [SerializeField] private float fireRate;
-        [SerializeField] private float spinRate;
-
-        private bool _shoot;
+        private bool _shootInput;
         private float _fireTime;
         private Vector3 _rotation;
 
         private void Awake()
         {
+            _bulletPool = new ObjectPool<Bullet>(OnCreateBullet, OnGetBullet, OnReleaseBullet);
+
             if (spawnPosition == null)
                 spawnPosition = transform;
 
-            _fireTime = startDelay;
+            _fireTime = pattern.StartDelay;
 
-            if (!isAiming)
-                _rotation.z = initialRotation;
+            if (!pattern.IsAiming)
+                _rotation.z = pattern.InitialRotation;
         }
+
+        #region Pool Methods
+        private Bullet OnCreateBullet()
+        {
+            var bullet = Instantiate(pattern.BulletPrefab, dynamic);
+            bullet.SetPool(_bulletPool);
+            return bullet;
+        }
+
+        private void OnGetBullet(Bullet bullet)
+        {
+            bullet.gameObject.SetActive(true);
+        }
+
+        private void OnReleaseBullet(Bullet bullet)
+        {
+            bullet.gameObject.SetActive(false);
+        }
+        #endregion
 
         private void FixedUpdate()
         {
@@ -50,9 +58,9 @@ namespace PedroAurelio
                 return;
             }
 
-            if (needInput)
+            if (pattern.NeedInput)
             {
-                if (_shoot) Shoot();
+                if (_shootInput) Shoot();
                 return;
             }
             
@@ -63,42 +71,42 @@ namespace PedroAurelio
         {
             UpdateRotation();
 
-            var missRange = new Vector3(0f, 0f, missAngleOpening * Random.Range(-missRate, missRate));
+            var missRange = new Vector3(0f, 0f, pattern.MissAngleOpening * Random.Range(-pattern.MissRate, pattern.MissRate));
             var currentRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
-            var direction = isAiming ? _rotation + missRange + currentRotation : _rotation + missRange;
+            var direction = pattern.IsAiming ? _rotation + missRange + currentRotation : _rotation + missRange;
 
-            if (sideCount == 1)
+            if (pattern.SideCount == 1)
             {
-                var bullet = Instantiate(bulletPrefab);
-                bullet.Initialize(spawnPosition.position, direction, bulletSpeed);
+                var bullet = _bulletPool.Get();
+                bullet.Initialize(spawnPosition.position, direction, pattern.BulletSpeed);
             }
             else
             {
                 var angleOffset = Vector3.zero;
                 float angleDivision;
 
-                if (angleOpening != 360f)   angleDivision = angleOpening / (sideCount - 1);
-                else                        angleDivision = angleOpening / sideCount;
+                if (pattern.AngleOpening != 360f)   angleDivision = pattern.AngleOpening / (pattern.SideCount - 1);
+                else                        angleDivision = pattern.AngleOpening / pattern.SideCount;
 
-                for (int i = 0; i < sideCount; i++)
+                for (int i = 0; i < pattern.SideCount; i++)
                 {
                     angleOffset.z = angleDivision * i;
 
-                    var bullet = Instantiate(bulletPrefab);
-                    bullet.Initialize(spawnPosition.position, direction + angleOffset, bulletSpeed);
+                    var bullet = _bulletPool.Get();
+                    bullet.Initialize(spawnPosition.position, direction + angleOffset, pattern.BulletSpeed);
                 }
             }
 
-            _fireTime = fireRate;
+            _fireTime = pattern.FireRate;
         }
 
         private void UpdateRotation()
         {
-            if (isAiming)   _rotation.z = -angleOpening * 0.5f;
-            else            _rotation.z += spinRate;
+            if (pattern.IsAiming)   _rotation.z = -pattern.AngleOpening * 0.5f;
+            else            _rotation.z += pattern.SpinRate;
         }
 
-        public void SetShootBool(bool value) => _shoot = value;
+        public void SetShootBool(bool value) => _shootInput = value;
         public void SetShootBool(InputAction.CallbackContext ctx)
         {
             switch (ctx.phase)

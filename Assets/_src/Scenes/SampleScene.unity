@@ -229,20 +229,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b83e5cc7c2d0e4a9a61d6cd3f1d43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3546339048700295790, guid: e4c720ac57446564aa83759e72b130f5, type: 3}
+  pattern: {fileID: 11400000, guid: 487f88a923ce8c64cb7108fa264639e8, type: 2}
   spawnPosition: {fileID: 0}
   dynamic: {fileID: 361212797}
-  isAiming: 0
-  initialRotation: 90
-  sideCount: 5
-  angleOpening: 360
-  missRate: 0
-  missAngleOpening: 0
-  needInput: 0
-  startDelay: 1.5
-  bulletSpeed: 6
-  fireRate: 1.2
-  spinRate: 0
 --- !u!1 &424195833
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,20 +1317,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b83e5cc7c2d0e4a9a61d6cd3f1d43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3546339048700295790, guid: 976a68d17b71bd944b2e3406f546a752, type: 3}
+  pattern: {fileID: 11400000, guid: 90f107a6fa7595948972eb7726f2697d, type: 2}
   spawnPosition: {fileID: 76527593}
   dynamic: {fileID: 361212797}
-  isAiming: 1
-  initialRotation: 0
-  sideCount: 1
-  angleOpening: 0
-  missRate: 0.3
-  missAngleOpening: 30
-  needInput: 1
-  startDelay: 0
-  bulletSpeed: 9
-  fireRate: 0.09
-  spinRate: 0
 --- !u!1 &1693719075
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,20 +1477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b83e5cc7c2d0e4a9a61d6cd3f1d43b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 3546339048700295790, guid: e4c720ac57446564aa83759e72b130f5, type: 3}
+  pattern: {fileID: 11400000, guid: 0696c4c7b1951d343b9f53f4778c1987, type: 2}
   spawnPosition: {fileID: 0}
   dynamic: {fileID: 361212797}
-  isAiming: 1
-  initialRotation: 0
-  sideCount: 1
-  angleOpening: 0
-  missRate: 0
-  missAngleOpening: 0
-  needInput: 0
-  startDelay: 1
-  bulletSpeed: 7
-  fireRate: 0.8
-  spinRate: 0
 --- !u!1 &1764466876
 GameObject:
   m_ObjectHideFlags: 0
