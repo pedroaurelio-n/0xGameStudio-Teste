@@ -29,10 +29,7 @@ namespace PedroAurelio
         private void Start()
         {
             if (startFacingDirection)
-            {
-                var desiredAngle = GetDesiredAngle();
-                aimObject.rotation = Quaternion.Euler(0f, 0f, desiredAngle);
-            }
+                SnapToAngle();
         }
 
         private void Update()
@@ -41,16 +38,22 @@ namespace PedroAurelio
             LookDirection = aimObject.right;
         }
 
-        private float RotateTowardsAngle()
-        {
-            var desiredAngle = GetDesiredAngle();
-            return Mathf.MoveTowardsAngle(aimObject.eulerAngles.z, desiredAngle, rotationSpeed * Time.deltaTime);
-        }
-
         private float GetDesiredAngle()
         {
             _rawDirection = _aimPosition - (Vector2)aimObject.position;
             return Mathf.Atan2(_rawDirection.y, _rawDirection.x) * Mathf.Rad2Deg;
+        }
+
+        public void SnapToAngle()
+        {
+            var desiredAngle = GetDesiredAngle();
+            aimObject.rotation = Quaternion.Euler(0f, 0f, desiredAngle);
+        }
+
+        private float RotateTowardsAngle()
+        {
+            var desiredAngle = GetDesiredAngle();
+            return Mathf.MoveTowardsAngle(aimObject.eulerAngles.z, desiredAngle, rotationSpeed * Time.deltaTime);
         }
 
         public void SetAimDirection(Vector2 position) => _aimPosition = position;
