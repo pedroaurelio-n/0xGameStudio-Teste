@@ -8,8 +8,10 @@ namespace PedroAurelio
     {
         [SerializeField] private Transform target;
 
-        private void Update()
+        protected override void Update()
         {
+            base.Update();
+            
             _Aim.SetAimDirection(target);
             _Movement.SetCurrentDirection(_Aim.LookDirection);
         }
