@@ -8,9 +8,13 @@ namespace PedroAurelio
 {
     public class ShootBullets : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField] private ShootingPattern pattern;
         [SerializeField] private Transform spawnPosition;
         [SerializeField] private Transform dynamic;
+
+        [Header("Settings")]
+        [SerializeField, Range(0f, 360f)]private float initialRotation;
 
         private ObjectPool<Bullet> _bulletPool;
 
@@ -28,7 +32,7 @@ namespace PedroAurelio
             _fireTime = pattern.StartDelay;
 
             if (!pattern.IsAiming)
-                _rotation.z = pattern.InitialRotation;
+                _rotation.z = initialRotation;
         }
 
         #region Pool Methods
@@ -72,8 +76,13 @@ namespace PedroAurelio
             UpdateRotation();
 
             var missRange = new Vector3(0f, 0f, pattern.MissAngleOpening * Random.Range(-pattern.MissRate, pattern.MissRate));
-            var currentRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
-            var direction = pattern.IsAiming ? _rotation + missRange + currentRotation : _rotation + missRange;
+            var direction = _rotation + missRange + new Vector3(0f, 0f, pattern.AngleOffset);
+
+            if (pattern.IsAiming)
+            {
+                var currentRotation = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+                direction += currentRotation;
+            }
 
             if (pattern.SideCount == 1)
             {

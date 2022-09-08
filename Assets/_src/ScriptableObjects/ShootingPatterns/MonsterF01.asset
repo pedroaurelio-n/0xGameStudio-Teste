@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 3546339048700295790, guid: e4c720ac57446564aa83759e72b130f5, type: 3}
   StartDelay: 1.5
-  InitialRotation: 90
   SpinRate: 0
-  SideCount: 5
-  AngleOpening: 360
+  SideCount: 3
+  AngleOpening: 45
+  AngleOffset: 0
   MissRate: 0
   MissAngleOpening: 0
   NeedInput: 0
-  IsAiming: 0
+  IsAiming: 1
   BulletSpeed: 5
   FireRate: 1.2

@@ -12,10 +12,10 @@ namespace PedroAurelio
 
         [Header("Spawn Settings")]
         public float StartDelay;
-        public float InitialRotation;
         public float SpinRate;
         public int SideCount;
         [Range(0f, 360f)] public float AngleOpening;
+        [Range(0f, 360f)] public float AngleOffset;
 
         [Header("Accuracy Settings")]
         [Range(0f, 1f)] public float MissRate;
