@@ -6,9 +6,9 @@ Para o teste, é necessário criar um mini jogo no estilo *top-down shooter* ond
 
 ### Instruções do projeto
 
-- Versão da Unity utilizada para desenvolvimento: 2021.3.5f1 LTS;
+- Clonar repositório e abrir projeto pela Unity. O projeto deverá ser jogado e testado direto pelo editor;
 
-- Projeto testado na última versão da Unity 2021(2021.3.9f1 LTS) sem problemas;
+- A versão da Unity **2021.3.5f1 LTS** foi usada para desenvolvimento, mas o projeto foi testado na última versão **(2021.3.9.f1 LTS)** sem problemas;
 
 - Cena de jogo está localizada na pasta Assets/\_src/Scenes;
 
