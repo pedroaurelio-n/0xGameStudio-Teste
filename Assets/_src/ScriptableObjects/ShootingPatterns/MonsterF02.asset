@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: MonsterF02
   m_EditorClassIdentifier: 
   BulletPrefab: {fileID: 3546339048700295790, guid: e4c720ac57446564aa83759e72b130f5, type: 3}
-  StartDelay: 1
-  InitialRotation: 0
+  StartDelay: 1.5
   SpinRate: 0
   SideCount: 1
   AngleOpening: 0
+  AngleOffset: 0
   MissRate: 0.15
   MissAngleOpening: 20
   NeedInput: 0
   IsAiming: 1
-  BulletSpeed: 7.2
+  BulletSpeed: 6
   FireRate: 0.8

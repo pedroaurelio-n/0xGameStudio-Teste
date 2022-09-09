@@ -13,6 +13,7 @@ namespace PedroAurelio
 
         private void Awake()
         {
+            _barList = new List<HealthBar>();
             _canvasTransform = transform;
         }
 
@@ -30,14 +31,6 @@ namespace PedroAurelio
             bar.transform.SetParent(_canvasTransform);
         }
 
-        private void OnEnable()
-        {
-            _barList = new List<HealthBar>();
-        }
-
-        private void OnDisable()
-        {
-            _barList.Clear();
-        }
+        private void OnDisable() => _barList.Clear();
     }
 }

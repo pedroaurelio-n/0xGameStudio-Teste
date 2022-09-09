@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.2
-  maxSpeed: 0.35
+  maxSpeed: 0.4
   posAccel: 3
   negAccel: 10
 --- !u!114 &1173887177
@@ -2376,8 +2376,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f04ac5d3b12a4ec4ba675c85e85181dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.55
-  maxSpeed: 0.9
+  moveSpeed: 0.6
+  maxSpeed: 1.1
   posAccel: 4
   negAccel: 10
 --- !u!114 &1997520344

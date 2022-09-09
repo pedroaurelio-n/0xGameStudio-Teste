@@ -35,7 +35,7 @@ namespace PedroAurelio
                 _rotation.z = initialRotation;
         }
 
-        #region Pool Methods
+        #region Pooling Methods
         private Bullet OnCreateBullet()
         {
             var bullet = Instantiate(pattern.BulletPrefab, dynamic);
@@ -43,15 +43,8 @@ namespace PedroAurelio
             return bullet;
         }
 
-        private void OnGetBullet(Bullet bullet)
-        {
-            bullet.gameObject.SetActive(true);
-        }
-
-        private void OnReleaseBullet(Bullet bullet)
-        {
-            bullet.gameObject.SetActive(false);
-        }
+        private void OnGetBullet(Bullet bullet) => bullet.gameObject.SetActive(true);
+        private void OnReleaseBullet(Bullet bullet) => bullet.gameObject.SetActive(false);
         #endregion
 
         private void FixedUpdate()
@@ -94,8 +87,10 @@ namespace PedroAurelio
                 var angleOffset = Vector3.zero;
                 float angleDivision;
 
-                if (pattern.AngleOpening != 360f)   angleDivision = pattern.AngleOpening / (pattern.SideCount - 1);
-                else                        angleDivision = pattern.AngleOpening / pattern.SideCount;
+                if (pattern.AngleOpening != 360f)
+                    angleDivision = pattern.AngleOpening / (pattern.SideCount - 1);
+                else
+                    angleDivision = pattern.AngleOpening / pattern.SideCount;
 
                 for (int i = 0; i < pattern.SideCount; i++)
                 {
@@ -111,8 +106,10 @@ namespace PedroAurelio
 
         private void UpdateRotation()
         {
-            if (pattern.IsAiming)   _rotation.z = -pattern.AngleOpening * 0.5f;
-            else            _rotation.z += pattern.SpinRate;
+            if (pattern.IsAiming)
+                _rotation.z = -pattern.AngleOpening * 0.5f;
+            else
+                _rotation.z += pattern.SpinRate;
         }
 
         public void SetShootBool(bool value) => _shootInput = value;

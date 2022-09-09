@@ -16,11 +16,10 @@ namespace PedroAurelio
                 _healthBar?.UpdateHealth(_currentHealth, maxHealth);
 
                 if (_currentHealth <= 0f)
-                {
                     Die();
-                }
             }
         }
+
         [Header("Settings")]
         [SerializeField] private float maxHealth = 100f;
         [SerializeField] private HealthBar healthBarPrefab;
@@ -29,10 +28,10 @@ namespace PedroAurelio
         private HealthBar _healthBar;
         private float _currentHealth;
 
-        private void Awake()
-        {
-            _currentHealth = maxHealth;
+        private void Awake() => _currentHealth = maxHealth;
 
+        private void Start()
+        {
             if (healthBarPrefab != null)
             {
                 _healthBar = Instantiate(healthBarPrefab);

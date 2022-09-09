@@ -6,6 +6,7 @@ namespace PedroAurelio
 {
     public class FollowTarget : Enemy
     {
+        [Header("Dependencies")]
         [SerializeField] private Transform target;
 
         protected override void Update()
