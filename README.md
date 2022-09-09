@@ -14,6 +14,8 @@ Para o teste, é necessário criar um mini jogo no estilo *top-down shooter* ond
 
 - Scripts estão localizados na pasta Assets/\_src/Scripts;
 
+- Assets visuais oferecidos para a avaliação estão localizados na pasta Assets/\_srt/Sprites;
+
 - Demais itens produzidos para o teste estarão na pasta Assets/\_src em suas respectivas sub-pastas.
 
 
